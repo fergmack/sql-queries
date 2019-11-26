@@ -1,0 +1,28 @@
+create table friends (
+  userid int not null,
+  friendid int not null
+  );
+  
+  create table pages (
+    userid int not null,
+    pageid int not null
+    );
+    
+    insert into friends VALUES(1, 2);
+    
+    insert into pages values
+    (1, 100), (1, 200), 
+    (2, 200), (2, 300);
+    
+    # we what the user and the recommned page
+select f.userid f_userid, p.pageid p_userid, p2.*
+from friends f
+left join pages p
+# get the pages where friendid in f equals user id in pages like (filters out user)
+on f.friendid = p.userid
+# now filter out the pages f.user already liked
+left join pages p2 
+# creates row where user id = id single userid in friends
+# creates null where userid is the user in f and pageid matches user's in f
+on (p2.userid = f.userid and p2.pageid = p.pageid )
+#then filter on the null
