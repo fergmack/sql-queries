@@ -52,3 +52,18 @@ on a.book_name = b.book_name
 group by 1, 2
 order by sum(copies_sold) desc
 limit 1
+
+////////////////////////////////////////////////////////////////////
+# get users who had events numbers between 2 and 6
+create table eventlogs (
+  userid int not null,
+  eventdate int not null
+  );
+  
+  insert into eventlogs (userid, eventdate) values
+  (1, 1234), (1, 565436), (1, 453), (1, 0000), (1, 12398894), (1, 4550000),(2, 54311); 
+  
+ select userid, count(eventdate) countevents
+from eventlogs e
+group by 1
+having countevents > 2 and countevents <= 6
