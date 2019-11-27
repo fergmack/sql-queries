@@ -26,3 +26,29 @@ left join pages p2
 # creates null where userid is the user in f and pageid matches user's in f
 on (p2.userid = f.userid and p2.pageid = p.pageid )
 #then filter on the null
+
+/////////////////////////////////////////////////////////////////////////////
+# SELECT TOP AUTHORS FROM THE FOLLOWING TABLE
+create table authors (
+ author_name varchar(60),
+ book_name varchar (60)
+ );
+ 
+ create table books (
+   book_name varchar(60),
+   copies_sold int not null
+   );
+   
+   insert into authors (author_name, book_name)
+   values ('John', 'book1'), ('John', 'book2'), ('mike', 'book3'), ('pat', 'book4');
+   
+   insert into books (book_name, copies_sold) values
+   ('book1', 400), ('book2', 500), ('book3', 600), ('book4', 700);
+   
+select author_name, a.book_name, sum(copies_sold) sold
+from authors a
+left join books b
+on a.book_name = b.book_name
+group by 1, 2
+order by sum(copies_sold) desc
+limit 1
