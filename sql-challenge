@@ -26,6 +26,7 @@ left join pages p2
 # creates null where userid is the user in f and pageid matches user's in f
 on (p2.userid = f.userid and p2.pageid = p.pageid )
 #then filter on the null
+where p2.userid is null
 
 /////////////////////////////////////////////////////////////////////////////
 # SELECT TOP AUTHORS FROM THE FOLLOWING TABLE
